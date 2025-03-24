@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Display</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Page Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2, #4CAF50);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #7ea5a9;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #eee;
+        }
+
+        .info strong {
+            color: #4CAF50;
+        }
+
+        a {
+            color: #a5c1c2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2><i class="fa fa-user"></i> Profile Information</h2>
+
+    <!-- Profile Picture -->
+    {% if PO.profile_pic %}
+        <img src="{{ PO.profile_pic.url }}" alt="Profile Picture" class="profile-pic">
+    {% else %}
+        <img src="https://via.placeholder.com/150" alt="No Profile Picture" class="profile-pic">
+    {% endif %}
+
+    <!-- User Info -->
+    <div class="info">
+        <strong>Username:</strong> {{ UO.username }}
+    </div>
+
+    <div class="info">
+        <strong>Email:</strong> {{ UO.email }}
+    </div>
+
+    <div class="info">
+        <strong>Address:</strong> {{ PO.address }}
+    </div>
+
+    <!-- Actions -->
+    <a href="{% url 'logout' %}" class="btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    <a href="{% url 'profile_update' %}" class="btn"><i class="fa fa-edit"></i> Edit Profile</a>
+</div>
+
+</body>
+</html>

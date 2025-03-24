@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .doctor-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            background: #f9f9f9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .details h2 {
+            color: #4CAF50;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 0 15px;
+        }
+
+        .details p {
+            margin: 8px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .appointment-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .appointment-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .doctor-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .appointment-btn {
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Doctors for {{ selected_illness }}</h1>
+
+    {% if doctors %}
+    <ul>
+        {% for doctor in doctors %}
+        <li class="doctor-card">
+            <div class="details">
+                <h2>{{ doctor.name }}</h2>
+                <p><strong>Experience:</strong> {{ doctor.experience }} years</p>
+                <p><strong>Contact:</strong> {{ doctor.mobile_number }}</p>
+                <p><strong>Rating:</strong> {{ doctor.rating }} ★</p>
+            </div>
+
+            <!-- Book Appointment Button -->
+            <a href="{% url 'appointment' doctor.id %}" class="appointment-btn">
+                <i class="fa fa-calendar-check"></i> Book an Appointment
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No doctors found for {{ selected_illness }}.</p>
+    {% endif %}
+
+    <a href="{% url 'get_started' %}" class="back-btn">⬅️ Back to Specialist Search Selection</a>
+</div>
+
+</body>
+</html>

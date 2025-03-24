@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #007BFF;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Appointment Confirmed!</h1>
+    <p>Your appointment with <strong>Dr. {{ appointment.doctor.name }}</strong> on <strong>{{ appointment.date }}</strong> at <strong>{{ appointment.time }}</strong> is confirmed.</p>
+
+    <!-- ✅ Generate PDF URL with appointment ID -->
+    <a href="{% url 'generate_pdf' appointment.id %}" class="btn">
+        <i class="fa fa-download"></i> Download Appointment Letter
+    </a>
+</div>
+
+</body>
+</html>

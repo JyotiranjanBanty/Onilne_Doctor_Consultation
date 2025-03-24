@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Background Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2, #4CAF50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Glassmorphism Container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Title Styling */
+        h2 {
+            color: #fff;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 12px #4CAF50;
+        }
+
+        button {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .message {
+            font-size: 15px;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2><i class="fa fa-sign-in-alt"></i> User Login</h2>
+
+    <!-- Display Authentication Error -->
+    {% if messages %}
+    <div class="message">
+        {% for message in messages %}
+            <div class="error">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Login Form -->
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <label for="un"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="un" name="un" placeholder="Enter your username" required>
+
+        <label for="pw"><i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="pw" name="pw" placeholder="Enter your password" required>
+
+        <button type="submit">Login <i class="fa fa-arrow-right"></i></button>
+    </form>
+
+    <div class="message">
+        <p>Don't have an account? <a href="{% url 'registration' %}">Register here</a>.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

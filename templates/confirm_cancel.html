@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Appointment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            font-size: 32px;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .confirm-btn {
+            background: #4CAF50;
+            color: white;
+        }
+        .confirm-btn:hover {
+            background: #218838;
+        }
+        .cancel-btn {
+            background: #DC3545;
+            color: white;
+        }
+        .cancel-btn:hover {
+            background: #C82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Confirm Your Appointment</h1>
+
+    <p><strong>Patient Name:</strong> {{ appointment.patient_name }}</p>
+    <p><strong>Doctor ID:</strong> {{ appointment.doctor_id }}</p>
+    <p><strong>Date:</strong> {{ appointment.date }}</p>
+    <p><strong>Time:</strong> {{ appointment.time }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="btn-container">
+            <button type="submit" name="action" value="confirm" class="confirm-btn">Confirm</button>
+            <button type="submit" name="action" value="cancel" class="cancel-btn">Cancel</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
